@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fsm>
+  <states>
+    <state>
+      <values>hR=0, hGe=0, hGr=1, vR=1, vGe=0, vGr=0, fR=1, fGr=0</values>
+      <position x="0.0" y="-240.0"/>
+      <number>0</number>
+      <name>hgr</name>
+      <radius>70</radius>
+      <isInitial>true</isInitial>
+    </state>
+    <state>
+      <values>hR=0, hGe=1, hGr=0, vR=1, vGe=0, vGr=0, fR=1, fGr=0</values>
+      <position x="240.0" y="-120.0"/>
+      <number>1</number>
+      <name>hge</name>
+      <radius>70</radius>
+      <isInitial>false</isInitial>
+    </state>
+    <state>
+      <values>hR=1, hGe=0, hGr=0, vR=1, vGe=1, vGr=0, fR=1, fGr=0</values>
+      <position x="240.0" y="120.0"/>
+      <number>2</number>
+      <name>hr</name>
+      <radius>70</radius>
+      <isInitial>false</isInitial>
+    </state>
+    <state>
+      <values>hR=1, hGe=0, hGr=0, vR=0, vGe=0, vGr=0, fR=0, fGr=1</values>
+      <position x="0.0" y="240.0"/>
+      <number>3</number>
+      <name>vgr</name>
+      <radius>70</radius>
+      <isInitial>false</isInitial>
+    </state>
+    <state>
+      <values>hR=1, hGe=0, hGr=0, vR=0, vGe=1, vGr=0, fR=1, fGr=0</values>
+      <position x="-240.0" y="120.0"/>
+      <number>4</number>
+      <name>vge</name>
+      <radius>70</radius>
+      <isInitial>false</isInitial>
+    </state>
+    <state>
+      <values>hR=1, hGe=1, hGr=0, vR=1, vGe=0, vGr=0, fR=1, fGr=0</values>
+      <position x="-240.0" y="-120.0"/>
+      <number>5</number>
+      <name>vr</name>
+      <radius>70</radius>
+      <isInitial>false</isInitial>
+    </state>
+  </states>
+  <transitions>
+    <transition>
+      <values></values>
+      <position x="104.0" y="-148.0"/>
+      <fromState reference="../../../states/state"/>
+      <toState reference="../../../states/state[2]"/>
+      <condition>a||b</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="239.11768" y="0.0"/>
+      <fromState reference="../../../states/state[2]"/>
+      <toState reference="../../../states/state[3]"/>
+      <condition>!r</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="119.899925" y="179.79985"/>
+      <fromState reference="../../../states/state[3]"/>
+      <toState reference="../../../states/state[4]"/>
+      <condition>!r</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="-120.307236" y="180.61447"/>
+      <fromState reference="../../../states/state[4]"/>
+      <toState reference="../../../states/state[5]"/>
+      <condition>!r</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="-239.96484" y="0.0"/>
+      <fromState reference="../../../states/state[5]"/>
+      <toState reference="../../../states/state[6]"/>
+      <condition>!r</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="-120.30756" y="-180.61513"/>
+      <fromState reference="../../../states/state[6]"/>
+      <toState reference="../../../states/state"/>
+      <condition>1</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="120.01907" y="-180.03815"/>
+      <fromState reference="../../../states/state[2]"/>
+      <toState reference="../../../states/state"/>
+      <condition>r</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="121.04753" y="-60.698353"/>
+      <fromState reference="../../../states/state[3]"/>
+      <toState reference="../../../states/state"/>
+      <condition>r</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="-0.22766775" y="0.0"/>
+      <fromState reference="../../../states/state[4]"/>
+      <toState reference="../../../states/state"/>
+      <condition>r</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="-119.28486" y="-59.52324"/>
+      <fromState reference="../../../states/state[5]"/>
+      <toState reference="../../../states/state"/>
+      <condition>r</condition>
+    </transition>
+  </transitions>
+</fsm>

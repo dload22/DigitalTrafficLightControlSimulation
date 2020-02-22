@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fsm>
+  <states>
+    <state>
+      <values>hR=0, hGe=0, hGr=1, vR=1, vGe=0, vGr=0, fR=1, fGr=0</values>
+      <position x="0.0" y="-180.0"/>
+      <number>0</number>
+      <name>hGr</name>
+      <radius>70</radius>
+      <isInitial>true</isInitial>
+    </state>
+    <state>
+      <values>hR=1, hGe=0, hGr=0, vR=0, vGe=0, vGr=1, fR=0, fGr=1</values>
+      <position x="0.0" y="60.0"/>
+      <number>1</number>
+      <name>vGr</name>
+      <radius>70</radius>
+      <isInitial>false</isInitial>
+    </state>
+  </states>
+  <transitions>
+    <transition>
+      <values></values>
+      <position x="41.0" y="-60.0"/>
+      <fromState reference="../../../states/state"/>
+      <toState reference="../../../states/state[2]"/>
+      <condition>a||b</condition>
+    </transition>
+    <transition>
+      <values></values>
+      <position x="-34.0" y="-60.0"/>
+      <fromState reference="../../../states/state[2]"/>
+      <toState reference="../../../states/state"/>
+      <condition>r</condition>
+    </transition>
+  </transitions>
+</fsm>
