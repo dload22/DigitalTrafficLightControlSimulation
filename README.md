@@ -11,14 +11,14 @@ The traffic lights are inputs from the component and should be outputs of a gene
 
 Up to three errors in the generated state machine are shown. Additionally if the cars crash they get red.
 
-![animation](distribution/animation.PNG)
+![animation](https://github.com/dload22/TrafficLightControl/tree/master/distribution/animation.PNG)
 
 You can download the jar [here](https://github.com/dload22/TrafficLightControl/tree/master/distribution/TrafficLightControlSimulationPlugin-1.0.jar).
 Put the file where you want and add the path to the file in the settings of digital under "Java library".
 
 Included in the test folder are test circuits and state machines which works and some which creates errors for testing the component.
 
-![testCircuit](distribution/testCircuit.PNG)
+![testCircuit](https://github.com/dload22/TrafficLightControl/tree/master/distribution/testCircuit.PNG)
 
 ## How do I get set up?
 
