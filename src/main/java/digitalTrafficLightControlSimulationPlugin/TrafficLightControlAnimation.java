@@ -687,7 +687,7 @@ public class TrafficLightControlAnimation extends JPanel {
 					}
 					break;
 				case DRIVE_IN:
-					if ((events.horizontalGreen || events.verticalGreen) && !((stateArray[2] == 4 && stateArray[1] == 5 && stateArray[0] == 0) || (stateArray[2] == 1 && stateArray[1] == 2 && stateArray[0] == 3) || stateArray[2] == -1 || stateArray[1] == -1 || stateArray[0] == -1)) {
+					if (((events.horizontalGreen && !events.verticalGreen) || (!events.horizontalGreen && events.verticalGreen)) && !((stateArray[2] == 4 && stateArray[1] == 5 && stateArray[0] == 0) || (stateArray[2] == 1 && stateArray[1] == 2 && stateArray[0] == 3) || stateArray[2] == -1 || stateArray[1] == -1 || stateArray[0] == -1)) {
 						errorHandler(7);
 					}
 										
@@ -929,7 +929,7 @@ public class TrafficLightControlAnimation extends JPanel {
 	
 	protected void stateHistory() {
 		int state = stateHandler();
-		System.out.println(state);
+		//System.out.println(state);
 		if (state != stateArray[0] && state != stateArray[1] && state != stateArray[2]) {
 			if (stateArray[0] == -1) {
 				stateArray[0] = state;

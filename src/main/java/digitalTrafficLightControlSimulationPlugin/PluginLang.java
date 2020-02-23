@@ -63,11 +63,11 @@ public final class PluginLang {
 			case "tlcwidth":
 				return "Fensterbreite";
 			case "tlcwidth_des":
-				return "Breite des Fensters für die Anzeige der Waschanlagen-Simulation";
+				return "Breite des Fensters für die Anzeige der Ampelsteuerung-Simulation";
 			case "tlcheight":
 				return "Fensterhöhe";
 			case "tlcheight_des":
-				return "Höhe des Fensters für die Anzeige der Waschanlagen-Simulation";
+				return "Höhe des Fensters für die Anzeige der Ampelsteuerung-Simulation";
 			case "tlcclock":
 				return "Taktausgang";
 			case "tlcclock_des":
@@ -152,11 +152,11 @@ public final class PluginLang {
 			case "tlcwidth":
 				return "window width";
 			case "tlcwidth_des":
-				return "Width of the car wash simulation screen window";
+				return "Width of the traffic light control simulation screen window";
 			case "tlcheight":
 				return "window height";
 			case "tlcheight_des":
-				return "Height of the car wash simulation screen window";
+				return "Height of the traffic light control simulation screen window";
 			case "tlcclock":
 				return "clock output";
 			case "tlcclock_des":
