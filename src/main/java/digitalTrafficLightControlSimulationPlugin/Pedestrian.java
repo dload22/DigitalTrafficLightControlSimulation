@@ -135,7 +135,7 @@ public class Pedestrian {
 }
 
 enum PedestrianState {
-	WAITING, ENTER_CROSSING, BEFORE_PEDESTRIAN_LIGHT, WALK_IN, WALK_OUT;
+	WAITING, ENTER_CROSSING, BEFORE_PEDESTRIAN_LIGHT, WALK_IN, DELETE;
 }
 
 enum PedestrianType {

@@ -87,13 +87,15 @@ public final class PluginLang {
 			case "text_4":
 				return "Zu lange Rot";
 			case "text_5":
-				return "Zu lange Grün";
+				return "Zu lange Gelb";
 			case "text_6":
 				return "Zu viele Lichter";
 			case "text_7":
 				return "Kein Rot-Gelb";
 			case "text_8":
 				return "Zu wenige Zustände";
+			case "text_9":
+				return "Zu viel Gelb";
 			}
 		} else {
 			switch (key) {
@@ -176,13 +178,15 @@ public final class PluginLang {
 			case "text_4":
 				return "Too long red";
 			case "text_5":
-				return "Too long green";
+				return "Too long yellow";
 			case "text_6":
 				return "Too many lights";
 			case "text_7":
 				return "No red-yellow";
 			case "text_8":
 				return "Not enough states";
+			case "text_9":
+				return "Too many yellow";
 			}
 		}
 		return null;

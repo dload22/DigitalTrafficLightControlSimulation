@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fsm>
+  <states>
+    <state>
+      <values>hR=0, hGe=0, hGr=1, vR=1, vGe=0, vGr=0, fR=1, fGr=0</values>
+      <position x="0.0" y="-240.0"/>
+      <number>0</number>
+      <name>hgr</name>
+      <radius>70</radius>
+      <isInitial>true</isInitial>
+    </state>
+  </states>
+  <transitions/>
+</fsm>

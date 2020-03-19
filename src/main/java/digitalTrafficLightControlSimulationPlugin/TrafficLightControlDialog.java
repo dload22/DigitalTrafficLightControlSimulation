@@ -21,7 +21,6 @@ public class TrafficLightControlDialog extends JDialog {
 	private static String getDialogTitle(ElementAttributes attr, TrafficLightControl trafficLightControl) {
         String t = attr.getLabel();
         if (t.length() > 0) return t;
-        
         return PluginLang.getTranslation("node_traffic_light_control");
     }
 	
@@ -31,7 +30,7 @@ public class TrafficLightControlDialog extends JDialog {
      * @param parent the parent window
      * @param attr the traffic light control attributes
      */
-	public TrafficLightControlDialog(JFrame parent, ElementAttributes attr,Model model, TrafficLightControl trafficLightControl) {
+	public TrafficLightControlDialog(JFrame parent, ElementAttributes attr, Model model, TrafficLightControl trafficLightControl) {
 		super(parent, getDialogTitle(attr, trafficLightControl), false);
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -67,7 +66,7 @@ public class TrafficLightControlDialog extends JDialog {
 				}
 				animation.timerCount = 0;
 				animation.timerCountRed = 0;
-				animation.timerCountGreen = 0;
+				animation.timerCountYellow = 0;
 	        }  
 	    });
 		
@@ -83,7 +82,7 @@ public class TrafficLightControlDialog extends JDialog {
 		timer = new Timer(speed, new ActionListener() {
 			@Override
 			public void actionPerformed (ActionEvent e ) {
-				animation.TimerTick();
+				animation.timerTick();
 				animation.repaint();
 			}
 		});

@@ -25,7 +25,7 @@ public class TrafficLightControlAnimation extends JPanel {
 	private boolean sensorB;
 
 	public int timerCount = 0;
-	public int timerCountGreen = 0;
+	public int timerCountYellow = 0;
 	public int timerCountRed = 0;
 	
 	public boolean start;
@@ -485,6 +485,21 @@ public class TrafficLightControlAnimation extends JPanel {
 					break;
 				}
 				break;
+			case 9: 
+				switch (i) {
+				case 0: 
+					g2.drawString((PluginLang.getTranslation("text_9")), 1250, 100);
+					break;
+				case 1: 
+					g2.drawString((PluginLang.getTranslation("text_9")), 1250, 200);
+					break;
+				case 2: 
+					g2.drawString((PluginLang.getTranslation("text_9")), 1250, 300);
+					break;
+				default:
+					break;
+				}
+				break;
 			default:
 				break;
 			}
@@ -519,7 +534,7 @@ public class TrafficLightControlAnimation extends JPanel {
 		}
 	}
 	
-	public void TimerTick() {
+	public void timerTick() {
 		sensorA = false;
 		sensorB = false;
 		Boolean lready = true;
@@ -529,16 +544,7 @@ public class TrafficLightControlAnimation extends JPanel {
 		Boolean pedestrian_ready = true;
 		
 		stateHistory();
-		
-		if (events.horizontalGreen || events.verticalGreen || events.pedestrianGreen)
-			timerCountGreen++;
-		if (events.horizontalYellow || events.verticalYellow)
-			timerCountGreen = 0;
-
-		if (events.horizontalRed || events.verticalRed || events.pedestrianRed)
-			timerCountRed++;
-		if (events.horizontalYellow || events.verticalYellow)
-			timerCountRed = 0;
+		errorCheck();
 		
 		if (start) {
 			for (Car car : cars) {
@@ -631,140 +637,74 @@ public class TrafficLightControlAnimation extends JPanel {
 					}
 					break;
 				case BEFORE_TRAFFIC_LIGHT:
-					//checks if all traffic lights are red
-					if (events.horizontalRed && events.verticalRed && !events.horizontalYellow && !events.verticalYellow)
-						errorHandler(1);
-					//checks if a traffic light is off
-					if ((!events.horizontalRed && !events.horizontalYellow && !events.horizontalGreen) || (!events.verticalRed && !events.verticalYellow && !events.verticalGreen) || (!events.pedestrianRed && !events.pedestrianGreen))
-						errorHandler(3);
-					//checks if car light is same as pedestrian light
-					if ((events.verticalRed && !events.pedestrianRed) || (!events.verticalRed && !events.verticalYellow && events.pedestrianRed))
-						errorHandler(1);
-					
 					switch (car.getCarPosition()) {
 					case 1:				
 						if (events.horizontalGreen) {
 							car.setCarState(CarState.DRIVE_IN);
-							//checks if a traffic light is more than green
-							if (events.horizontalYellow || events.horizontalRed || events.verticalYellow)
-								errorHandler(6);
-							//checks if two traffic lights are green
-							if (events.verticalGreen)
-								errorHandler(2);
 						}
 						break;					
 					case 2:	
 						sensorA = true;
 						if (events.verticalGreen) {
 							car.setCarState(CarState.DRIVE_IN);
-							if (events.verticalYellow || events.verticalRed || events.horizontalYellow)
-								errorHandler(6);
-							if (events.horizontalGreen)
-								errorHandler(2);
 						}
 						break;
 					case 3:	
 						if (events.horizontalGreen) {
 							car.setCarState(CarState.DRIVE_IN);
-							if (events.horizontalYellow || events.horizontalRed || events.verticalYellow)
-								errorHandler(6);
-							if (events.verticalGreen)
-								errorHandler(2);
 						}
 						break;
 					case 4:	
 						sensorA = true;
 						if (events.verticalGreen) {
 							car.setCarState(CarState.DRIVE_IN);
-							if (events.verticalYellow || events.verticalRed || events.horizontalYellow)
-								errorHandler(6);
-							if (events.horizontalGreen)
-								errorHandler(2);
 						}
 						break;
 					default:
 						break;
 					}
 					break;
-				case DRIVE_IN:
-					if (((events.horizontalGreen && !events.verticalGreen) || (!events.horizontalGreen && events.verticalGreen)) && !((stateArray[2] == 4 && stateArray[1] == 5 && stateArray[0] == 0) || (stateArray[2] == 1 && stateArray[1] == 2 && stateArray[0] == 3) || stateArray[2] == -1 || stateArray[1] == -1 || stateArray[0] == -1)) {
-						errorHandler(7);
-					}
-										
+				case DRIVE_IN:				
 					switch (car.getCarPosition()) {
 					case 1:
-						if (events.horizontalGreen || (car.posX+car.getWidth()) > 440) {
-							car.updatePosition(car.getSpeed(), 0);
-							if (car.posX > 1990)
-								car.setCarState(CarState.DRIVE_OUT);
-							if (timerCountRed > 231) {
-								errorHandler(4);
-							}
-						}
-						break;					
-					case 2:	
-						if (events.verticalGreen || car.posY < 1410) {
-							car.updatePosition(0, -car.getSpeed());
-							if (car.posY < 10) {
-								car.setCarState(CarState.DRIVE_OUT);
-							}
-							if (timerCountGreen > 231) {
-								errorHandler(5);
-							}
-							if (timerCountRed > 231) {
-								errorHandler(4);
-							}
-						}
-						break;
-					case 3:	
-						if (events.horizontalGreen || car.posX < 1410) {
-							car.updatePosition(-car.getSpeed(), 0);
-							if (car.posX < 10)
-								car.setCarState(CarState.DRIVE_OUT);
-							if (timerCountRed > 231) {
-								errorHandler(4);
-							}
-						}
-						break;
-					case 4:		
-						if (events.verticalGreen || car.posY > 590) {
-							car.updatePosition(0, car.getSpeed());
-							if (car.posY > 1990) {
-								car.setCarState(CarState.DRIVE_OUT);
-							}
-							if (timerCountGreen > 231) {
-								errorHandler(5);
-							}
-							if (timerCountRed > 231) {
-								errorHandler(4);
-							}
-						}
-						break;
-					default:
-						break;
-					}
-					break;
-				case DRIVE_OUT:
-					switch (car.getCarPosition()) {
-					case 1:				
 						car.updatePosition(car.getSpeed(), 0);
 						if (car.posX > 2000)
-							carsToRemove.add(car);
+							car.setCarState(CarState.DELETE);
 						break;					
-					case 2:				
+					case 2:	
 						car.updatePosition(0, -car.getSpeed());
-						if (car.posY < 0- car.getWidth())
-							carsToRemove.add(car);
+						if (car.posY < 0- car.getWidth()) {
+							car.setCarState(CarState.DELETE);
+						}
 						break;
 					case 3:	
 						car.updatePosition(-car.getSpeed(), 0);
 						if (car.posX < 0-car.getWidth())
-							carsToRemove.add(car);
+							car.setCarState(CarState.DELETE);
 						break;
 					case 4:		
 						car.updatePosition(0, car.getSpeed());
-						if (car.posY > 2000 + car.getWidth())
-							carsToRemove.add(car);
+						if (car.posY > 2000 + car.getWidth()) {
+							car.setCarState(CarState.DELETE);
+						}
+						break;
+					default:
+						break;
+					}
+					break;
+				case DELETE:
+					switch (car.getCarPosition()) {
+					case 1:				
+						carsToRemove.add(car);
+						break;					
+					case 2:				
+						carsToRemove.add(car);
+						break;
+					case 3:	
+						carsToRemove.add(car);
+						break;
+					case 4:		
+						carsToRemove.add(car);
 						break;
 					default:
 						break;
@@ -821,19 +761,15 @@ public class TrafficLightControlAnimation extends JPanel {
 					sensorB = true;
 					if (events.pedestrianGreen) {
 						pedestrian.setPedestrianState(PedestrianState.WALK_IN);
-						if (events.pedestrianRed)
-							errorHandler(6);
 					}
 					break;										
 				case WALK_IN:
 					pedestrian.updatePosition(0, -pedestrian.getSpeed());
-					if (pedestrian.posY < 10)
-						pedestrian.setPedestrianState(PedestrianState.WALK_OUT);
-					break;					
-				case WALK_OUT:			
-					pedestrian.updatePosition(0, -pedestrian.getSpeed());
 					if (pedestrian.posY < 0)
-						pedestriansToRemove.add(pedestrian);
+						pedestrian.setPedestrianState(PedestrianState.DELETE);
+					break;					
+				case DELETE:			
+					pedestriansToRemove.add(pedestrian);
 					break;					
 				default:
 					break;
@@ -887,6 +823,62 @@ public class TrafficLightControlAnimation extends JPanel {
 			reset = false;
 		} else {
 			tlcd.updateOutput(sensorA, sensorB, false, false);
+		}
+	}
+	
+	protected void errorCheck() {
+		if (events.horizontalYellow || events.verticalYellow)
+			timerCountYellow++;
+		if (!events.horizontalYellow && !events.verticalYellow)
+			timerCountYellow = 0;
+		if (timerCountYellow > 67) {
+			errorHandler(5);
+			timerCountYellow = 0;
+		}
+		
+		if (events.horizontalRed || events.verticalRed || events.pedestrianRed)
+			timerCountRed++;
+		if (events.horizontalYellow || events.verticalYellow)
+			timerCountRed = 0;
+		if (timerCountRed > 231) {
+			errorHandler(4);
+			timerCountRed = 0;
+		}
+		
+		//checks if all traffic lights are red
+		if (events.horizontalRed && (events.verticalRed || events.pedestrianRed) && !events.horizontalYellow && !events.verticalYellow)
+			errorHandler(1);
+		//checks if a traffic light is off
+		if ((!events.horizontalRed && !events.horizontalYellow && !events.horizontalGreen) || (!events.verticalRed && !events.verticalYellow && !events.verticalGreen) || (!events.pedestrianRed && !events.pedestrianGreen))
+			errorHandler(3);
+		//checks if car light is same as pedestrian light
+		//if ((events.verticalRed && !events.pedestrianRed) || (!events.verticalRed && !events.verticalYellow && events.pedestrianRed) || (events.verticalGreen && !events.pedestrianGreen) || (!events.verticalGreen && events.pedestrianGreen) )
+			//errorHandler(8);
+		
+		//checks if too many lights are on
+		if (events.horizontalGreen && (events.horizontalYellow || events.horizontalRed || events.verticalYellow))
+			errorHandler(6);
+		if (events.verticalGreen && (events.verticalYellow || events.verticalRed || events.horizontalYellow))
+			errorHandler(6);
+		if (events.pedestrianRed && events.pedestrianGreen)
+			errorHandler(6);
+		if ((stateArray[1] == 0 && events.verticalYellow) || (stateArray[1] == 3  && events.horizontalYellow))
+			errorHandler(6);
+		/*if ((stateArray[2] == 0 && stateArray[1] == 5 && stateArray[0] == 2) || (stateArray[2] == 3 && stateArray[1] == 2 && stateArray[0] == 5)) {
+		    errorHandler(6);
+		}*/
+		
+		//checks if too many lights are green
+		if (events.horizontalGreen && (events.verticalGreen || events.pedestrianGreen))
+			errorHandler(2);		
+		
+		//checks if too many lights are yellow
+		if (events.horizontalYellow && events.verticalYellow)
+			errorHandler(9);		
+		
+		//checks if no red-yellow is used
+		if (((events.horizontalGreen && !events.verticalGreen) || (!events.horizontalGreen && events.verticalGreen)) && !((stateArray[2] == 4 && stateArray[1] == 5 && stateArray[0] == 0) || (stateArray[2] == 1 && stateArray[1] == 2 && stateArray[0] == 3) || stateArray[2] == -1 || stateArray[1] == -1 || stateArray[0] == -1)) {
+			errorHandler(7);
 		}
 	}
 	

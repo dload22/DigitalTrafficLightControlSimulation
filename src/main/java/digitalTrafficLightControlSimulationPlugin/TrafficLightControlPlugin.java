@@ -29,8 +29,8 @@ public class TrafficLightControlPlugin implements ComponentSource {
      * @param args args
      */
     public static void main(String[] args) {
-        new Main.MainBuilder()
+        /*new Main.MainBuilder()
                 .setLibrary(new ElementLibrary().registerComponentSource(new TrafficLightControlPlugin()))
-                .openLater();
+                .openLater();*/
     }
 }
